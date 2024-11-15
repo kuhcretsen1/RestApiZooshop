@@ -1,0 +1,12 @@
+C:\Users\Віталій\RiderProjects\ZooShopRest\ZooShop.Domain\bin\Debug\net8.0\ZooShop.Domain.deps.json
+C:\Users\Віталій\RiderProjects\ZooShopRest\ZooShop.Domain\bin\Debug\net8.0\ZooShop.Domain.dll
+C:\Users\Віталій\RiderProjects\ZooShopRest\ZooShop.Domain\bin\Debug\net8.0\ZooShop.Domain.pdb
+C:\Users\Віталій\RiderProjects\ZooShopRest\ZooShop.Domain\obj\Debug\net8.0\ZooShop.Domain.csproj.AssemblyReference.cache
+C:\Users\Віталій\RiderProjects\ZooShopRest\ZooShop.Domain\obj\Debug\net8.0\ZooShop.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Віталій\RiderProjects\ZooShopRest\ZooShop.Domain\obj\Debug\net8.0\ZooShop.Domain.AssemblyInfoInputs.cache
+C:\Users\Віталій\RiderProjects\ZooShopRest\ZooShop.Domain\obj\Debug\net8.0\ZooShop.Domain.AssemblyInfo.cs
+C:\Users\Віталій\RiderProjects\ZooShopRest\ZooShop.Domain\obj\Debug\net8.0\ZooShop.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Віталій\RiderProjects\ZooShopRest\ZooShop.Domain\obj\Debug\net8.0\ZooShop.Domain.dll
+C:\Users\Віталій\RiderProjects\ZooShopRest\ZooShop.Domain\obj\Debug\net8.0\refint\ZooShop.Domain.dll
+C:\Users\Віталій\RiderProjects\ZooShopRest\ZooShop.Domain\obj\Debug\net8.0\ZooShop.Domain.pdb
+C:\Users\Віталій\RiderProjects\ZooShopRest\ZooShop.Domain\obj\Debug\net8.0\ref\ZooShop.Domain.dll
