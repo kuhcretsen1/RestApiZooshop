@@ -17,3 +17,4 @@ public class ZooShopDbContext : DbContext
     {
         modelBuilder.ApplyConfiguration(new AnimalConfiguration());    }
 }
+
