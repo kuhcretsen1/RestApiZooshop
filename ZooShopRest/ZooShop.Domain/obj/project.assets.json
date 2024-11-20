@@ -257,11 +257,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Віталій\\Documents\\GitHub\\ZooShopRest\\ZooShop.Domain\\ZooShop.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Domain\\ZooShop.Domain.csproj",
       "projectName": "ZooShop.Domain",
-      "projectPath": "C:\\Users\\Віталій\\Documents\\GitHub\\ZooShopRest\\ZooShop.Domain\\ZooShop.Domain.csproj",
+      "projectPath": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Domain\\ZooShop.Domain.csproj",
       "packagesPath": "C:\\Users\\Віталій\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Віталій\\Documents\\GitHub\\ZooShopRest\\ZooShop.Domain\\obj\\",
+      "outputPath": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Віталій\\AppData\\Roaming\\NuGet\\NuGet.Config"

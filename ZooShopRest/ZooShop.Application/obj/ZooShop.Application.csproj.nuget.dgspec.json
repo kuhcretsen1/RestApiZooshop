@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Віталій\\Documents\\GitHub\\ZooShopRest\\ZooShop.Application\\ZooShop.Application.csproj": {}
+    "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Application\\ZooShop.Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Віталій\\Documents\\GitHub\\ZooShopRest\\ZooShop.Application\\ZooShop.Application.csproj": {
+    "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Application\\ZooShop.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Віталій\\Documents\\GitHub\\ZooShopRest\\ZooShop.Application\\ZooShop.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Application\\ZooShop.Application.csproj",
         "projectName": "ZooShop.Application",
-        "projectPath": "C:\\Users\\Віталій\\Documents\\GitHub\\ZooShopRest\\ZooShop.Application\\ZooShop.Application.csproj",
+        "projectPath": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Application\\ZooShop.Application.csproj",
         "packagesPath": "C:\\Users\\Віталій\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Віталій\\Documents\\GitHub\\ZooShopRest\\ZooShop.Application\\obj\\",
+        "outputPath": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Віталій\\AppData\\Roaming\\NuGet\\NuGet.Config"
