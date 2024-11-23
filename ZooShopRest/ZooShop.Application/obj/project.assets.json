@@ -920,6 +920,20 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "ZooShop.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "FluentValidation.AspNetCore": "11.3.0",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0"
+        },
+        "compile": {
+          "bin/placeholder/ZooShop.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ZooShop.Domain.dll": {}
+        }
       }
     }
   },
@@ -2369,6 +2383,11 @@
         "system.threading.channels.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "ZooShop.Domain/1.0.0": {
+      "type": "project",
+      "path": "../ZooShop.Domain/ZooShop.Domain.csproj",
+      "msbuildProject": "../ZooShop.Domain/ZooShop.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2376,7 +2395,8 @@
       "FluentValidation.AspNetCore >= 11.3.0",
       "MediatR.Extensions.Microsoft.DependencyInjection >= 11.1.0",
       "Microsoft.EntityFrameworkCore >= 8.0.0",
-      "Microsoft.EntityFrameworkCore.Design >= 8.0.0"
+      "Microsoft.EntityFrameworkCore.Design >= 8.0.0",
+      "ZooShop.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2403,7 +2423,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Domain\\ZooShop.Domain.csproj": {
+              "projectPath": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Domain\\ZooShop.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

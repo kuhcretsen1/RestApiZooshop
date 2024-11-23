@@ -19,7 +19,13 @@ public class AnimalsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Animal>>> GetAnimals()
     {
-        return await _context.Animals.ToListAsync();
+        var animals = await _context.Animals.ToListAsync();
+        if (!animals.Any())
+        {
+            return NotFound("No animals found.");
+        }
+
+        return Ok(animals);
     }
 
     [HttpGet("{id}")]
@@ -28,25 +34,36 @@ public class AnimalsController : ControllerBase
         var animal = await _context.Animals.FindAsync(id);
         if (animal == null)
         {
-            return NotFound();
+            return NotFound($"Animal with ID {id} not found.");
         }
-        return animal;
+
+        return Ok(animal);
     }
 
     [HttpPost]
-    public async Task<ActionResult<Animal>> CreateAnimal(Animal animal)
+    public async Task<ActionResult<Animal>> CreateAnimal([FromBody] Animal animal)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         _context.Animals.Add(animal);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetAnimal), new { id = animal.Id }, animal);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateAnimal(int id, Animal animal)
+    public async Task<IActionResult> UpdateAnimal(int id, [FromBody] Animal animal)
     {
         if (id != animal.Id)
         {
-            return BadRequest();
+            return BadRequest("ID in the route does not match ID in the body.");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
         }
 
         _context.Entry(animal).State = EntityState.Modified;
@@ -59,12 +76,9 @@ public class AnimalsController : ControllerBase
         {
             if (!_context.Animals.Any(e => e.Id == id))
             {
-                return NotFound();
+                return NotFound($"Animal with ID {id} not found.");
             }
-            else
-            {
-                throw;
-            }
+            throw;
         }
 
         return NoContent();
@@ -76,7 +90,7 @@ public class AnimalsController : ControllerBase
         var animal = await _context.Animals.FindAsync(id);
         if (animal == null)
         {
-            return NotFound();
+            return NotFound($"Animal with ID {id} not found.");
         }
 
         _context.Animals.Remove(animal);
