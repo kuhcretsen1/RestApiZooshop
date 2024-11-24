@@ -15,15 +15,15 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
             .HasMaxLength(100); // Назва обов'язкова, максимум 100 символів
 
         // Відношення з Animal
-        builder.HasMany(c => c.Animals)
-            .WithOne(a => a.Category)
-            .HasForeignKey(a => a.CategoryId)
-            .OnDelete(DeleteBehavior.Restrict); // Обмеження на видалення категорії (тварини залишаться)
+        builder.HasMany(c => c.Animals) // Кожна категорія має багато тварин
+            .WithOne(a => a.Category) // Кожна тварина належить одній категорії
+            .HasForeignKey(a => a.CategoryId) // Зв'язок через CategoryId в тварині
+            .OnDelete(DeleteBehavior.Restrict); // Обмеження на видалення категорії (тварини не видаляються)
 
         // Відношення з Product
-        builder.HasMany(c => c.Products)
-            .WithOne(p => p.Category)
-            .HasForeignKey(p => p.CategoryId)
+        builder.HasMany(c => c.Products) // Кожна категорія має багато продуктів
+            .WithOne(p => p.Category) // Кожен продукт належить одній категорії
+            .HasForeignKey(p => p.CategoryId) // Зв'язок через CategoryId в продукті
             .OnDelete(DeleteBehavior.Cascade); // Якщо категорію видалено, продукти видаляються
     }
 }

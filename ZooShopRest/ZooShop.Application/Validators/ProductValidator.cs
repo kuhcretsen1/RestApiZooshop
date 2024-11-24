@@ -1,6 +1,8 @@
 using FluentValidation;
 using ZooShop.Domain.Entities;
 
+namespace ZooShop.Application.Validators;
+
 public class ProductValidator : AbstractValidator<Product>
 {
     public ProductValidator()

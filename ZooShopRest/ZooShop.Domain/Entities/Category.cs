@@ -6,11 +6,8 @@ public class Category
     public string Name { get; set; } = string.Empty; // Назва категорії
 
     // Відношення
-    private readonly List<Animal> _animals = new();
-    private readonly List<Product> _products = new();
-
-    public IReadOnlyCollection<Animal> Animals => _animals.AsReadOnly(); // Тварини в категорії
-    public IReadOnlyCollection<Product> Products => _products.AsReadOnly(); // Продукти в категорії
+    public ICollection<Animal> Animals { get; set; } = new List<Animal>(); // Тварини в категорії
+    public ICollection<Product> Products { get; set; } = new List<Product>(); // Продукти в категорії
 
     public Category(string name)
     {
@@ -19,11 +16,11 @@ public class Category
 
     public void AddAnimal(Animal animal)
     {
-        _animals.Add(animal);
+        Animals.Add(animal);
     }
 
     public void AddProduct(Product product)
     {
-        _products.Add(product);
+        Products.Add(product);
     }
 }

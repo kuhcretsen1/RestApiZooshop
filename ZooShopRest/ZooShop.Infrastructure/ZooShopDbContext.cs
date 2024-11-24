@@ -12,9 +12,12 @@ public class ZooShopDbContext : DbContext
     public DbSet<Order> Orders { get; set; } = null!;
 
     public ZooShopDbContext(DbContextOptions<ZooShopDbContext> options) : base(options) {}
+    public DbSet<Customer> Customers { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new AnimalConfiguration());    }
+        modelBuilder.ApplyConfiguration(new AnimalConfiguration());
+        modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+    }
 }
 

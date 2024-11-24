@@ -1,6 +1,7 @@
-namespace ZooShop.Application.Commands;
-
-public class DeleteCustomerCommand
+namespace ZooShop.Application.Commands
 {
-    
+    public class DeleteCustomerCommand
+    {
+        public int CustomerId { get; set; }
+    }
 }
