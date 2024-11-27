@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using ZooShop.Domain.Entities;
 using ZooShop.Infrastructure.Configuration;
+using ZooShop.Domain.Animals;
+using ZooShop.Domain.Categorys;
+using ZooShop.Domain.Orders;
+using ZooShop.Domain.Products;
+using ZooShop.Domain.Customers;
 
 namespace ZooShop.Infrastructure;
 

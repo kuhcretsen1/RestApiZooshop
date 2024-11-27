@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ZooShop.Domain.Entities;
+using ZooShop.Domain.Categorys;
 
 namespace ZooShop.Infrastructure.Configuration;
 

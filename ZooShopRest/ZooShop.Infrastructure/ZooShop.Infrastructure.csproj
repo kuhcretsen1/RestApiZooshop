@@ -15,9 +15,11 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+      <PackageReference Include="Optional" Version="5.0.0-alpha" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ZooShop.Application\ZooShop.Application.csproj" />
       <ProjectReference Include="..\ZooShop.Domain\ZooShop.Domain.csproj" />
     </ItemGroup>
 

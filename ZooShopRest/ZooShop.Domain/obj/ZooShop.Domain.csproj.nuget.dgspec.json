@@ -1,21 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/alxcgs/GitRepos/RestApiZooshop/ZooShopRest/ZooShop.Domain/ZooShop.Domain.csproj": {}
+    "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Domain\\ZooShop.Domain.csproj": {}
   },
   "projects": {
-    "/Users/alxcgs/GitRepos/RestApiZooshop/ZooShopRest/ZooShop.Domain/ZooShop.Domain.csproj": {
+    "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Domain\\ZooShop.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/alxcgs/GitRepos/RestApiZooshop/ZooShopRest/ZooShop.Domain/ZooShop.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Domain\\ZooShop.Domain.csproj",
         "projectName": "ZooShop.Domain",
-        "projectPath": "/Users/alxcgs/GitRepos/RestApiZooshop/ZooShopRest/ZooShop.Domain/ZooShop.Domain.csproj",
-        "packagesPath": "/Users/alxcgs/.nuget/packages/",
-        "outputPath": "/Users/alxcgs/GitRepos/RestApiZooshop/ZooShopRest/ZooShop.Domain/obj/",
+        "projectPath": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Domain\\ZooShop.Domain.csproj",
+        "packagesPath": "C:\\Users\\Віталій\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
-          "/Users/alxcgs/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Віталій\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -69,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/Users/alxcgs/.dotnet/sdk/8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
