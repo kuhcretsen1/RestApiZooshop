@@ -1,6 +1,15 @@
+using Optional;
+using ZooShop.Domain.Animals;
+
 namespace ZooShop.Application.Common.Interfaces.Repositories;
 
-public class IAnimalRepository
+public interface IAnimalRepository
 {
-    
+    Task<IReadOnlyList<Animal>> GetAll(CancellationToken cancellationToken);
+    Task<Option<Animal>> GetById(int id, CancellationToken cancellationToken);
+    Task<Option<Animal>> GetByName(string name, CancellationToken cancellationToken);
+    Task<Animal> Add(Animal animal, CancellationToken cancellationToken);
+    Task<Animal> Update(Animal animal, CancellationToken cancellationToken);
+    Task<Animal> Delete(Animal animal, CancellationToken cancellationToken);
+    Task<bool> Exists(int id, CancellationToken cancellationToken);
 }
