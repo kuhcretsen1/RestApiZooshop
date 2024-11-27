@@ -17,10 +17,7 @@ namespace ZooShop.Infrastructure.Configuration
                 .IsRequired()
                 .HasColumnType("decimal(18, 2)"); // Ціна продукту
 
-            // Відношення з Order (Багато до багатьох)
-            builder.HasMany(p => p.Orders)
-                .WithMany(o => o.Products)
-                .UsingEntity(j => j.ToTable("OrderProducts")); // Проміжна таблиця для зв'язку
+      
         }
     }
 }

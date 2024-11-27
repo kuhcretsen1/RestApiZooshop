@@ -1,6 +1,6 @@
 using ZooShop.Domain.Products;
 using ZooShop.Domain.Categorys;
-
+using ZooShop.Domain.Orders;
 
 namespace ZooShop.Domain.Orders
 {

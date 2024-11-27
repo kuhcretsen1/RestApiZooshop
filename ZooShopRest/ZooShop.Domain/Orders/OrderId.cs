@@ -1,4 +1,4 @@
-namespace ZooShop.Domain.Orders;
+namespace ZooShop.Domain.Order;
 
 public record OrderId(Guid Value)
 {
