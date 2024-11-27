@@ -2530,19 +2530,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Віталій\\.nuget\\packages\\": {}
+    "/Users/alxcgs/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Infrastructure\\ZooShop.Infrastructure.csproj",
+      "projectUniqueName": "/Users/alxcgs/GitRepos/RestApiZooshop/ZooShopRest/ZooShop.Infrastructure/ZooShop.Infrastructure.csproj",
       "projectName": "ZooShop.Infrastructure",
-      "projectPath": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Infrastructure\\ZooShop.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\Віталій\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Infrastructure\\obj\\",
+      "projectPath": "/Users/alxcgs/GitRepos/RestApiZooshop/ZooShopRest/ZooShop.Infrastructure/ZooShop.Infrastructure.csproj",
+      "packagesPath": "/Users/alxcgs/.nuget/packages/",
+      "outputPath": "/Users/alxcgs/GitRepos/RestApiZooshop/ZooShopRest/ZooShop.Infrastructure/obj/",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
-        "C:\\Users\\Віталій\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/alxcgs/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -2554,11 +2555,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Application\\ZooShop.Application.csproj": {
-              "projectPath": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Application\\ZooShop.Application.csproj"
+            "/Users/alxcgs/GitRepos/RestApiZooshop/ZooShopRest/ZooShop.Application/ZooShop.Application.csproj": {
+              "projectPath": "/Users/alxcgs/GitRepos/RestApiZooshop/ZooShopRest/ZooShop.Application/ZooShop.Application.csproj"
             },
-            "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Domain\\ZooShop.Domain.csproj": {
-              "projectPath": "C:\\Users\\Віталій\\Documents\\GitHub\\RestApiZooshop\\ZooShopRest\\ZooShop.Domain\\ZooShop.Domain.csproj"
+            "/Users/alxcgs/GitRepos/RestApiZooshop/ZooShopRest/ZooShop.Domain/ZooShop.Domain.csproj": {
+              "projectPath": "/Users/alxcgs/GitRepos/RestApiZooshop/ZooShopRest/ZooShop.Domain/ZooShop.Domain.csproj"
             }
           }
         }
@@ -2621,7 +2622,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/alxcgs/.dotnet/sdk/8.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

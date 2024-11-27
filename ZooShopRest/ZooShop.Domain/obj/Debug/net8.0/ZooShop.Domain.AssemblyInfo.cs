@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZooShop.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5d9fd54fe22456ea939328480e11a26fff0deb5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e29cc3ceddaa6aaa34871b4cf5161fb44ee28d41")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZooShop.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZooShop.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

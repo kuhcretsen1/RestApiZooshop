@@ -22,7 +22,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 
         // Відношення з Product
         builder.HasMany(c => c.Products) // Кожна категорія має багато продуктів
-            .WithOne(p => p.Category) // Кожен продукт належить одній категорії
+            .WithOne(p => p.CategoryId) // Кожен продукт належить одній категорії
             .HasForeignKey(p => p.CategoryId) // Зв'язок через CategoryId в продукті
             .OnDelete(DeleteBehavior.Cascade); // Якщо категорію видалено, продукти видаляються
     }

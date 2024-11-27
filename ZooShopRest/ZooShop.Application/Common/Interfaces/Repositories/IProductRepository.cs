@@ -1,7 +1,7 @@
-using ZooShop.Domain.Products;
 using Optional;
+using ZooShop.Domain.Products;
 
-namespace ZooShop.Common.Interfaces.Repositories;
+namespace ZooShop.Application.Common.Interfaces.Repositories;
 
 public interface IProductRepository
 {

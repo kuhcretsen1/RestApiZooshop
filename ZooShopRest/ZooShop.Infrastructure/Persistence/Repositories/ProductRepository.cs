@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using ZooShop.Domain.Products;
 using ZooShop.Application.Common.Interfaces.Repositories;
 using Optional;
-using ZooShop.Common.Interfaces.Repositories;
 
 namespace ZooShop.Infrastructure.Persistence.Repositories;
 
