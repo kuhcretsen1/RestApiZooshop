@@ -8,9 +8,14 @@ namespace ZooShop.Infrastructure.Configuration
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
+            
             // Налаштування первинного ключа
             builder.HasKey(c => c.Id);
-
+            
+            builder.Property(cp => cp.Id)
+                .HasConversion(id => id.Value, value => new CustomerId(value))
+                .IsRequired();
+            
             // Налаштування властивостей
             builder.Property(c => c.Name)
                 .IsRequired()

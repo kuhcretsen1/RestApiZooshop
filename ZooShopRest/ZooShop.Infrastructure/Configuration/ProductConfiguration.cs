@@ -10,6 +10,10 @@ namespace ZooShop.Infrastructure.Configuration
         public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.HasKey(p => p.Id); // Первинний ключ
+            builder.Property(cp => cp.Id)
+                .HasConversion(id => id.Value, value => new ProductId(value))
+                .IsRequired();
+            
             builder.Property(p => p.Name)
                 .IsRequired()
                 .HasMaxLength(200); // Назва продукту обов'язкова, максимум 200 символів

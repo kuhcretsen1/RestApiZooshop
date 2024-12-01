@@ -37,8 +37,9 @@ public class ProductRepository : IProductRepository
         return product == null ? Option.None<Product>() : Option.Some(product);
     }
 
+    
 
-    public async Task Delete(int id, CancellationToken cancellationToken)
+    public async Task Delete(ProductId id, CancellationToken cancellationToken)
     {
         var product = await _context.Products.FindAsync(new object[] { id }, cancellationToken);
 

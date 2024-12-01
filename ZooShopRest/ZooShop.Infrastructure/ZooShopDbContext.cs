@@ -6,7 +6,8 @@ using ZooShop.Domain.Orders;
 using ZooShop.Domain.Products;
 using ZooShop.Domain.Customers;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
-
+using ZooShop.Domain.CategoryProducts;
+using ZooShop.Infrastructure.Converters;
 namespace ZooShop.Infrastructure;
 
 public class ZooShopDbContext : DbContext
@@ -16,6 +17,7 @@ public class ZooShopDbContext : DbContext
     public DbSet<Product> Products { get; set; } = null!;
     public DbSet<Order> Orders { get; set; } = null!;
 
+    public DbSet<CategoryProduct> CategoryProducts { get; set; } = null!;
     public ZooShopDbContext(DbContextOptions<ZooShopDbContext> options) : base(options) {}
     public DbSet<Customer> Customers { get; set; } = null!;
 
@@ -23,6 +25,7 @@ public class ZooShopDbContext : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ZooShopDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
+        
     }
 
 }

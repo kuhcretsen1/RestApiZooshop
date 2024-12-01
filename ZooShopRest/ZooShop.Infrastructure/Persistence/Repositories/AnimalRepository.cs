@@ -23,7 +23,7 @@ public class AnimalRepository : IAnimalRepository, IAnimalQueries
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Option<Animal>> GetById(int id, CancellationToken cancellationToken)
+    public async Task<Option<Animal>> GetById(AnimalId id, CancellationToken cancellationToken)
     {
         var entity = await _context.Animals
             .AsNoTracking()
@@ -67,7 +67,7 @@ public class AnimalRepository : IAnimalRepository, IAnimalQueries
         return animal;
     }
 
-    public async Task<bool> Exists(int id, CancellationToken cancellationToken)
+    public async Task<bool> Exists(AnimalId id, CancellationToken cancellationToken)
     {
         return await _context.Animals.AnyAsync(a => a.Id == id, cancellationToken);
     }

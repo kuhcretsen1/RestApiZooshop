@@ -165,3 +165,7 @@ C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Api\
 C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Api\bin\Debug\net8.0\EFCore.NamingConventions.dll
+C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Api\bin\Debug\net8.0\Optional.dll
+C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Api\bin\Debug\net8.0\ZooShop.Application.dll
+C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Api\bin\Debug\net8.0\ZooShop.Application.pdb

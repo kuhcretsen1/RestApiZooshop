@@ -14,6 +14,8 @@ public class CategoryProduct
 
     public DateTime CreatedAt { get; }
     
+    private CategoryProduct() { }
+    
     // Constructor (for direct creation)
     public CategoryProduct(CategoryProductId id, CategoryId categoryId, ProductId productId, DateTime createdAt)
     {

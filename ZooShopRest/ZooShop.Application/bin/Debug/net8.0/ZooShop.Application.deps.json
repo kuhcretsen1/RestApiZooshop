@@ -12,7 +12,7 @@
           "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
           "Microsoft.EntityFrameworkCore": "8.0.0",
           "Microsoft.EntityFrameworkCore.Design": "8.0.0",
-          "ZooShop.Api": "1.0.0",
+          "Optional": "5.0.0-alpha",
           "ZooShop.Domain": "1.0.0"
         },
         "runtime": {
@@ -369,7 +369,6 @@
           }
         }
       },
-      "Microsoft.Extensions.ApiDescription.Server/6.0.5": {},
       "Microsoft.Extensions.Caching.Abstractions/8.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "8.0.0"
@@ -426,14 +425,6 @@
         }
       },
       "Microsoft.Extensions.Primitives/8.0.0": {},
-      "Microsoft.OpenApi/1.6.22": {
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.OpenApi.dll": {
-            "assemblyVersion": "1.6.22.0",
-            "fileVersion": "1.6.22.0"
-          }
-        }
-      },
       "Mono.TextTemplating/2.2.1": {
         "dependencies": {
           "System.CodeDom": "4.4.0"
@@ -445,66 +436,11 @@
           }
         }
       },
-      "Npgsql/8.0.0": {
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
-        },
+      "Optional/5.0.0-alpha": {
         "runtime": {
-          "lib/net8.0/Npgsql.dll": {
-            "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.0.0"
-          }
-        }
-      },
-      "Npgsql.EntityFrameworkCore.PostgreSQL/8.0.0": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "8.0.0",
-          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.0",
-          "Microsoft.EntityFrameworkCore.Relational": "8.0.0",
-          "Npgsql": "8.0.0"
-        },
-        "runtime": {
-          "lib/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {
-            "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.0.0"
-          }
-        }
-      },
-      "Swashbuckle.AspNetCore/7.0.0": {
-        "dependencies": {
-          "Microsoft.Extensions.ApiDescription.Server": "6.0.5",
-          "Swashbuckle.AspNetCore.Swagger": "7.0.0",
-          "Swashbuckle.AspNetCore.SwaggerGen": "7.0.0",
-          "Swashbuckle.AspNetCore.SwaggerUI": "7.0.0"
-        }
-      },
-      "Swashbuckle.AspNetCore.Swagger/7.0.0": {
-        "dependencies": {
-          "Microsoft.OpenApi": "1.6.22"
-        },
-        "runtime": {
-          "lib/net8.0/Swashbuckle.AspNetCore.Swagger.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.0.854"
-          }
-        }
-      },
-      "Swashbuckle.AspNetCore.SwaggerGen/7.0.0": {
-        "dependencies": {
-          "Swashbuckle.AspNetCore.Swagger": "7.0.0"
-        },
-        "runtime": {
-          "lib/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.0.854"
-          }
-        }
-      },
-      "Swashbuckle.AspNetCore.SwaggerUI/7.0.0": {
-        "runtime": {
-          "lib/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.0.854"
+          "lib/netstandard2.0/Optional.dll": {
+            "assemblyVersion": "4.1.0.0",
+            "fileVersion": "4.1.0.0"
           }
         }
       },
@@ -600,22 +536,6 @@
         }
       },
       "System.Threading.Channels/6.0.0": {},
-      "ZooShop.Api/1.0.0": {
-        "dependencies": {
-          "FluentValidation.AspNetCore": "11.3.0",
-          "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
-          "Microsoft.EntityFrameworkCore": "8.0.0",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.0",
-          "Swashbuckle.AspNetCore": "7.0.0",
-          "ZooShop.Infrastructure": "1.0.0"
-        },
-        "runtime": {
-          "ZooShop.Api.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "ZooShop.Domain/1.0.0": {
         "dependencies": {
           "FluentValidation.AspNetCore": "11.3.0",
@@ -623,21 +543,6 @@
         },
         "runtime": {
           "ZooShop.Domain.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "ZooShop.Infrastructure/1.0.0": {
-        "dependencies": {
-          "FluentValidation.AspNetCore": "11.3.0",
-          "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
-          "Microsoft.EntityFrameworkCore": "8.0.0",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.0",
-          "ZooShop.Domain": "1.0.0"
-        },
-        "runtime": {
-          "ZooShop.Infrastructure.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -777,13 +682,6 @@
       "path": "microsoft.entityframeworkcore.relational/8.0.0",
       "hashPath": "microsoft.entityframeworkcore.relational.8.0.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Ckb5EDBUNJdFWyajfXzUIMRkhf52fHZOQuuZg/oiu8y7zDCVwD0iHhew6MnThjHmevanpxL3f5ci2TtHQEN6bw==",
-      "path": "microsoft.extensions.apidescription.server/6.0.5",
-      "hashPath": "microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512"
-    },
     "Microsoft.Extensions.Caching.Abstractions/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -854,13 +752,6 @@
       "path": "microsoft.extensions.primitives/8.0.0",
       "hashPath": "microsoft.extensions.primitives.8.0.0.nupkg.sha512"
     },
-    "Microsoft.OpenApi/1.6.22": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-aBvunmrdu/x+4CaA/UP1Jx4xWGwk4kymhoIRnn2Vp+zi5/KOPQJ9EkSXHRUr01WcGKtYl3Au7XfkPJbU1G2sjQ==",
-      "path": "microsoft.openapi/1.6.22",
-      "hashPath": "microsoft.openapi.1.6.22.nupkg.sha512"
-    },
     "Mono.TextTemplating/2.2.1": {
       "type": "package",
       "serviceable": true,
@@ -868,47 +759,12 @@
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
     },
-    "Npgsql/8.0.0": {
+    "Optional/5.0.0-alpha": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Qiz74U+O7Mv4knrsXgKVYGJjgwoziK+aMFZqz7PtKR3vyGIhZA0tnW6HoUnL3X+YqtmVuhmoKkN8LDWEHMxPbw==",
-      "path": "npgsql/8.0.0",
-      "hashPath": "npgsql.8.0.0.nupkg.sha512"
-    },
-    "Npgsql.EntityFrameworkCore.PostgreSQL/8.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-GDXiMS9peEdjSCU/rfgyHruio7q6tYuywGaktqEi6UPQ6ILechp3fVVX+dHXkIXt4nklCBzYVWkzFrSL9ubKUA==",
-      "path": "npgsql.entityframeworkcore.postgresql/8.0.0",
-      "hashPath": "npgsql.entityframeworkcore.postgresql.8.0.0.nupkg.sha512"
-    },
-    "Swashbuckle.AspNetCore/7.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-aF6oCgMy8CC17cSbILAw9J4UVhqOE+0Z11V8JstA+pIrXcY8ZbNL3ayHOWKZm0NdHMS6RI1k5sFVfMkpZOobvw==",
-      "path": "swashbuckle.aspnetcore/7.0.0",
-      "hashPath": "swashbuckle.aspnetcore.7.0.0.nupkg.sha512"
-    },
-    "Swashbuckle.AspNetCore.Swagger/7.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Y2QnwZkuszoIYpz069xqDU0h/rklVedE4a0NOdb8HSDTcXCmsi7Zm2RGdJccde5MojHmEhDmZggCO1wgpfZ2IA==",
-      "path": "swashbuckle.aspnetcore.swagger/7.0.0",
-      "hashPath": "swashbuckle.aspnetcore.swagger.7.0.0.nupkg.sha512"
-    },
-    "Swashbuckle.AspNetCore.SwaggerGen/7.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-f/urqk9zkb5ZXc3ljLNP++JgYe2HTlA4WaIaO1DLRQLRFh3HXIZakFfMfTWX1T8NVqeMyJF7MzETN4HsokxNuQ==",
-      "path": "swashbuckle.aspnetcore.swaggergen/7.0.0",
-      "hashPath": "swashbuckle.aspnetcore.swaggergen.7.0.0.nupkg.sha512"
-    },
-    "Swashbuckle.AspNetCore.SwaggerUI/7.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-rJJony+jsxvpfJM9ZGVxjp0DVpalZv8cAhiMSLW6L2hgUWb7k5qPVuzQHWXtkT8lrG1hQ8vWeR+HUwgCQm9J3A==",
-      "path": "swashbuckle.aspnetcore.swaggerui/7.0.0",
-      "hashPath": "swashbuckle.aspnetcore.swaggerui.7.0.0.nupkg.sha512"
+      "sha512": "sha512-4CisAnzvD5FddKfDelDPNk+R+ZxrORue393+1p9ymaVCqW6lsmj/1b4tL2Fi+a0KVT0BRogEZwKUDm3PI2hwPw==",
+      "path": "optional/5.0.0-alpha",
+      "hashPath": "optional.5.0.0-alpha.nupkg.sha512"
     },
     "System.CodeDom/4.4.0": {
       "type": "package",
@@ -1015,17 +871,7 @@
       "path": "system.threading.channels/6.0.0",
       "hashPath": "system.threading.channels.6.0.0.nupkg.sha512"
     },
-    "ZooShop.Api/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "ZooShop.Domain/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "ZooShop.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

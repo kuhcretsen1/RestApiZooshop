@@ -33,3 +33,5 @@ C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Infr
 C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Infrastructure\obj\Debug\net8.0\ZooShop.Infrastructure.pdb
 C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Infrastructure\obj\Debug\net8.0\ZooShop.Infrastructure.genruntimeconfig.cache
 C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Infrastructure\obj\Debug\net8.0\ref\ZooShop.Infrastructure.dll
+C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Infrastructure\bin\Debug\net8.0\ZooShop.Application.dll
+C:\Users\Віталій\Documents\GitHub\RestApiZooshop\ZooShopRest\ZooShop.Infrastructure\bin\Debug\net8.0\ZooShop.Application.pdb

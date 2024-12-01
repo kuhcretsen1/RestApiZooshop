@@ -1,9 +1,10 @@
-using Optional;
 using ZooShop.Domain.Products;
+using ZooShop.Application.Common.Interfaces;
+using Optional;
 
-namespace ZooShop.Application.Common.Interfaces.Repositories;
+namespace ZooShop.Application.Common.Interfaces.Queries;
 
-public interface IProductRepository
+public interface IProductQueries
 {
     Task<Product> Add(Product product, CancellationToken cancellationToken);
     Task<Product> Update(Product product, CancellationToken cancellationToken);

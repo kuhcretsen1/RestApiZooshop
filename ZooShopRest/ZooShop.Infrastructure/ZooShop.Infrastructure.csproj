@@ -24,4 +24,8 @@
       <ProjectReference Include="..\ZooShop.Domain\ZooShop.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Persistence\Migrations\" />
+    </ItemGroup>
+
 </Project>

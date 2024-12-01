@@ -11,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ZooShopDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("ZooShopDatabase")));
 
+builder.Services.AddScoped<ZooShopDbContextInitialiser>();
+
 // Додай MediatR
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 

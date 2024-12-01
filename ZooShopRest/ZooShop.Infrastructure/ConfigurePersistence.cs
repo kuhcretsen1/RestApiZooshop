@@ -6,8 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using ZooShop.Domain.Categorys;
-using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
+using ZooShop.Application.Common.Interfaces.Queries;
 
 namespace ZooShop.Infrastructure;
 

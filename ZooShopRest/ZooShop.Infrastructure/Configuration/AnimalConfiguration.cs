@@ -9,6 +9,11 @@ public class AnimalConfiguration : IEntityTypeConfiguration<Animal>
     public void Configure(EntityTypeBuilder<Animal> builder)
     {
         builder.HasKey(a => a.Id); // Первинний ключ
+        
+        builder.Property(cp => cp.Id)
+            .HasConversion(id => id.Value, value => new (value))
+            .IsRequired();
+        
         builder.Property(a => a.Name)
             .IsRequired()
             .HasMaxLength(150); // Назва тварини максимум 150 символів
