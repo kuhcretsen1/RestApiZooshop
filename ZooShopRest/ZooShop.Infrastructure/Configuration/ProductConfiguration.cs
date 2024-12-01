@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ZooShop.Domain.Products;
+using ZooShop.Domain.Categorys;
 
 namespace ZooShop.Infrastructure.Configuration
 {
@@ -17,7 +18,9 @@ namespace ZooShop.Infrastructure.Configuration
                 .IsRequired()
                 .HasColumnType("decimal(18, 2)"); // Ціна продукту
 
-      
+            // Перетворення для CategoryId (якщо це потрібно)
+            builder.Property(p => p.CategoryId)
+                .HasConversion(c => c.Value, c => new CategoryId(c)); // Перетворення для CategoryId
         }
     }
 }

@@ -16,6 +16,11 @@ public class Animal
     public int CategoryId { get; set; }
     public Category Category { get; set; } = null!; // Категорія (обов'язкова)
 
+    public static Animal Create(string name, string species, int age, decimal price, int categoryId)
+    {
+        return new Animal(name, species, age, price, categoryId);
+    }
+
     public Animal(string name, string species, int age, decimal price, int categoryId)
     {
         Name = name;

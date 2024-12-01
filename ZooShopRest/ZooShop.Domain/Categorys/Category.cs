@@ -9,6 +9,7 @@ namespace ZooShop.Domain.Categorys;
 public class Category
 {
     public CategoryId Id { get; }
+    
     public string Name { get; private set; }
 
     private readonly List<Animal> _animals = new();
@@ -17,7 +18,7 @@ public class Category
     private readonly List<Product> _products = new();
     public IReadOnlyCollection<Product> Products => _products.AsReadOnly();
 
-    private Category(CategoryId id, string name)
+    protected  Category(CategoryId id, string name)
     {
         Id = id;
         Name = name;

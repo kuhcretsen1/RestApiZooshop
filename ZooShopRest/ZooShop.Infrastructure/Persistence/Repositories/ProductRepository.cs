@@ -28,14 +28,15 @@ public class ProductRepository : IProductRepository
         return product;
     }
 
-    public async Task<Option<Product>> GetById(int id, CancellationToken cancellationToken)
+    public async Task<Option<Product>> GetById(ProductId id, CancellationToken cancellationToken)
     {
         var product = await _context.Products
             .AsNoTracking()
-            .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+            .FirstOrDefaultAsync(p => p.Id.Value == id.Value, cancellationToken);
 
         return product == null ? Option.None<Product>() : Option.Some(product);
     }
+
 
     public async Task Delete(int id, CancellationToken cancellationToken)
     {

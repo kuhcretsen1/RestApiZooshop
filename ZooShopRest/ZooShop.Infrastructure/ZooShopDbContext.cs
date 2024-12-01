@@ -5,6 +5,7 @@ using ZooShop.Domain.Categorys;
 using ZooShop.Domain.Orders;
 using ZooShop.Domain.Products;
 using ZooShop.Domain.Customers;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace ZooShop.Infrastructure;
 
@@ -20,8 +21,9 @@ public class ZooShopDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new AnimalConfiguration());
-        modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ZooShopDbContext).Assembly);
+        base.OnModelCreating(modelBuilder);
     }
+
 }
 

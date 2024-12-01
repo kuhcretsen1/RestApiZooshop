@@ -1,29 +1,30 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ZooShop.Domain.Categorys;
+using ZooShop.Domain.Animals;
+using ZooShop.Domain.Products;
 
-namespace ZooShop.Infrastructure.Configuration;
-
-public class CategoryConfiguration : IEntityTypeConfiguration<Category>
+namespace ZooShop.Infrastructure.Configuration
 {
-    public void Configure(EntityTypeBuilder<Category> builder)
+    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
-        // Основні налаштування
-        builder.HasKey(c => c.Id); // Первинний ключ
-        builder.Property(c => c.Name)
-            .IsRequired()
-            .HasMaxLength(100); // Назва обов'язкова, максимум 100 символів
+        public void Configure(EntityTypeBuilder<Category> builder)
+        {
+            builder.HasKey(c => c.Id); // Первинний ключ
+            builder.Property(c => c.Id)
+                .HasConversion(c => c.Value, c => new CategoryId(c)); // Перетворення для CategoryId
 
-        // Відношення з Animal
-        builder.HasMany(c => c.Animals) // Кожна категорія має багато тварин
-            .WithOne(a => a.Category) // Кожна тварина належить одній категорії
-            .HasForeignKey(a => a.CategoryId) // Зв'язок через CategoryId в тварині
-            .OnDelete(DeleteBehavior.Restrict); // Обмеження на видалення категорії (тварини не видаляються)
+            builder.Property(c => c.Name)
+                .IsRequired()
+                .HasMaxLength(100); // Назва категорії обов'язкова, максимум 100 символів
 
-        // Відношення з Product
-        builder.HasMany(c => c.Products) // Кожна категорія має багато продуктів
-            .WithOne(p => p.CategoryId) // Кожен продукт належить одній категорії
-            .HasForeignKey(p => p.CategoryId) // Зв'язок через CategoryId в продукті
-            .OnDelete(DeleteBehavior.Cascade); // Якщо категорію видалено, продукти видаляються
+            // Відношення з Animal
+            builder.HasMany(c => c.Animals)
+                .WithOne(a => a.Category)
+                .HasForeignKey(a => a.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict); // Заборона каскадного видалення
+
+           
+        }
     }
 }
