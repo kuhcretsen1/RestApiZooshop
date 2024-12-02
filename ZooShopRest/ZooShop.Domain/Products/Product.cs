@@ -10,7 +10,7 @@ namespace ZooShop.Domain.Products
         public string Description { get; private set; }
         public decimal Price { get; private set; }
         public int StockQuantity { get; private set; }
-        public CategoryId CategoryId { get; private set; }  // Змінено тип з int на CategoryId
+        public CategoryId CategoryId { get; private set; }  
 
         private Product(ProductId id, string name, string description, decimal price, int stockQuantity, CategoryId categoryId)
         {
@@ -19,11 +19,14 @@ namespace ZooShop.Domain.Products
             Description = description;
             Price = price;
             StockQuantity = stockQuantity;
-            CategoryId = categoryId;  // Тепер передаємо об'єкт CategoryId
+            CategoryId = categoryId;  
         }
 
         public static Product New(ProductId id, string name, string description, decimal price, int stockQuantity, CategoryId categoryId)
-            => new(id, name, description, price, stockQuantity, categoryId);  // Вносимо зміни тут
+        {
+            return new Product(id, name, description, price, stockQuantity, categoryId);
+        }
+
 
         public void UpdateDetails(string name, string description, decimal price, int stockQuantity)
         {

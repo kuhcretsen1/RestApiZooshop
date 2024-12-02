@@ -28,6 +28,18 @@ public class ProductRepository : IProductRepository
         return product;
     }
 
+    public async Task<Option<Product>> GetByName(string name, CancellationToken cancellationToken)
+    {
+        var product = await _context.Products
+            .AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Name == name, cancellationToken);
+
+        // Використовуємо Option.Some або Option.None залежно від результату
+        return product != null ? Option.Some(product) : Option.None<Product>();
+    }
+
+
+
     public async Task<Option<Product>> GetById(ProductId id, CancellationToken cancellationToken)
     {
         var product = await _context.Products
