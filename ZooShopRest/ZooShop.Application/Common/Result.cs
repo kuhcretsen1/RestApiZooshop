@@ -26,6 +26,9 @@ public readonly struct Result<TValue, TError>
     public static implicit operator Result<TValue, TError>(TValue value) => new(value);
     public static implicit operator Result<TValue, TError>(TError error) => new(error);
 
+    public static Result<TValue, TError> Success(TValue value) => new(value);
+    public static Result<TValue, TError> Failure(TError error) => new(error);
+
     public TResult Match<TResult>(
         Func<TValue, TResult> success,
         Func<TError, TResult> failure) =>

@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using ZooShop.Domain.Products;
 using ZooShop.Application.Common.Interfaces.Repositories;
 using Optional;
+using ZooShop.Application.Common;
+using ZooShop.Application.Products.Exceptions;
 
 namespace ZooShop.Infrastructure.Persistence.Repositories;
 
@@ -51,7 +53,7 @@ public class ProductRepository : IProductRepository
 
     
 
-    public async Task Delete(ProductId id, CancellationToken cancellationToken)
+    public async Task<Result<Product, ProductException>> Delete(ProductId id, CancellationToken cancellationToken)
     {
         var product = await _context.Products.FindAsync(new object[] { id }, cancellationToken);
 
@@ -59,6 +61,11 @@ public class ProductRepository : IProductRepository
         {
             _context.Products.Remove(product);
             await _context.SaveChangesAsync(cancellationToken);
+            return Result<Product, ProductException>.Success(product);
+        }
+        else
+        {
+            return Result<Product, ProductException>.Failure(new ProductNotFoundException(id));
         }
     }
 

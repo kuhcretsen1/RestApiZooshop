@@ -23,5 +23,9 @@ namespace ZooShop.Domain.Orders
         public static Order New(OrderId id, decimal totalAmount) => new(id, totalAmount);
 
         public void AddProduct(Product product) => _products.Add(product);
+        public void UpdateTotalAmount(decimal totalAmount)
+        {
+            TotalAmount = totalAmount;
+        }
     }
 }
