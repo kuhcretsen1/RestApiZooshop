@@ -1,3 +1,8 @@
+using ZooShop.Application.Animals.Exceptions;
+using ZooShop.Application.Orders.Exceptions;
+using ZooShop.Application.Products.Exceptions;
+using ZooShop.Application.Сategorys.Exceptions;
+
 namespace ZooShop.Application.Common;
 
 public readonly struct Result<TValue, TError>
