@@ -32,6 +32,7 @@ public class CreateProductCommandHandler(
             async () => await CreateEntity(request, cancellationToken));
     }
 
+    
     private async Task<Result<Product, ProductException>> CreateEntity(
         CreateProductCommand request,
         CancellationToken cancellationToken)

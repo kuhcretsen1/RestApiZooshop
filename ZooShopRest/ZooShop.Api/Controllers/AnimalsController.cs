@@ -1,69 +1,92 @@
-using Microsoft.AspNetCore.Mvc;
-using ZooShop.Application.Common.Interfaces.Repositories;
+
+using ZooShop.Api.Dtos;
+using ZooShop.Api.Modules.Errors;
+using ZooShop.Application.Common.Interfaces.Queries;
+using ZooShop.Application.Animals.Commands;
 using ZooShop.Domain.Animals;
-using ZooShop.Application.Common;
-using ZooShop.Application.Animals.Exceptions;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ZooShop.Api.Controllers;
 
+[Route("animals")]
 [ApiController]
-[Route("api/[controller]")]
 public class AnimalsController : ControllerBase
 {
-    private readonly IAnimalRepository _animalRepository;
+    private readonly ISender _sender;
+    private readonly IAnimalQueries _animalQueries;
 
-    public AnimalsController(IAnimalRepository animalRepository)
+    public AnimalsController(ISender sender, IAnimalQueries animalQueries)
     {
-        _animalRepository = animalRepository;
+        _sender = sender;
+        _animalQueries = animalQueries;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Animal>>> GetAll(CancellationToken cancellationToken)
+    public async Task<ActionResult<IReadOnlyList<AnimalDto>>> GetAll(CancellationToken cancellationToken)
     {
-        var animals = await _animalRepository.GetAll(cancellationToken);
-        return Ok(animals);
+        var entities = await _animalQueries.GetAll(cancellationToken);
+        return Ok(entities.Select(AnimalDto.FromDomainModel).ToList());
     }
 
-    [HttpGet("{id:guid}")]
-    public async Task<ActionResult<Animal>> GetById(Guid id, CancellationToken cancellationToken)
+    [HttpGet("{animalId:guid}")]
+    public async Task<ActionResult<AnimalDto>> Get([FromRoute] Guid animalId, CancellationToken cancellationToken)
     {
-        var animal = await _animalRepository.GetById(new AnimalId(id), cancellationToken);
-        return animal.Match<ActionResult>(
-            a => Ok(a),
-            () => NotFound(new AnimalNotFoundException(new AnimalId(id))));
+        var entity = await _animalQueries.GetById(new AnimalId(animalId), cancellationToken);
+        return entity.Match<ActionResult<AnimalDto>>(
+            u => Ok(AnimalDto.FromDomainModel(u)),
+            () => NotFound());
     }
 
     [HttpPost]
-    public async Task<ActionResult<Animal>> Create([FromBody] Animal animal, CancellationToken cancellationToken)
+    public async Task<ActionResult<AnimalDto>> Create([FromBody] AnimalDto request, CancellationToken cancellationToken)
     {
-        var createdAnimal = await _animalRepository.Add(animal, cancellationToken);
-        return CreatedAtAction(nameof(GetById), new { id = createdAnimal.Id }, createdAnimal);
-    }
-
-    [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] Animal animal, CancellationToken cancellationToken)
-    {
-        if (id != animal.Id.Value)
+        var input = new CreateAnimalCommand
         {
-            return BadRequest();
-        }
+            Name = request.Name,
+            Species = request.Species,
+            Age = request.Age,
+            Price = request.Price,
+            CategoryId = request.CategoryId
+        };
 
-        var updatedAnimal = await _animalRepository.Update(animal, cancellationToken);
-        return Ok(updatedAnimal);
+        var result = await _sender.Send(input, cancellationToken);
+        return result.Match<ActionResult<AnimalDto>>(
+            c =>  AnimalDto.FromDomainModel(c),
+            e => e.ToObjectResult());
+    }
+    [HttpPut("{animalId:guid}")]
+    public async Task<ActionResult<AnimalDto>> Update([FromRoute] Guid animalId, [FromBody] AnimalDto request, CancellationToken cancellationToken)
+    {
+        var input = new UpdateAnimalCommand
+        {
+            AnimalId = animalId,
+            Name = request.Name,
+            Species = request.Species,
+            Age = request.Age,
+            Price = request.Price,
+            CategoryId = request.CategoryId
+        };
+
+        var result = await _sender.Send(input, cancellationToken);
+        return result.Match<ActionResult<AnimalDto>>(
+            f => Ok(AnimalDto.FromDomainModel(f)),
+            e => e.ToObjectResult());
     }
 
-    [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
+    [HttpDelete("{animalId:guid}")]
+    public async Task<ActionResult<AnimalDto>> Delete([FromRoute] Guid animalId, CancellationToken cancellationToken)
     {
-        var animalId = new AnimalId(id);
-        var animal = await _animalRepository.GetById(animalId, cancellationToken);
+        var input = new DeleteAnimalCommand
+        {
+            AnimalId = animalId
+        };
 
-        return await animal.Match<Task<IActionResult>>(
-            async a =>
-            {
-                await _animalRepository.Delete(a, cancellationToken);
-                return NoContent();
-            },
-            () => Task.FromResult<IActionResult>(NotFound(new AnimalNotFoundException(animalId))));
+        var result = await _sender.Send(input, cancellationToken);
+        return result.Match<ActionResult<AnimalDto>>(
+            c => Ok(AnimalDto.FromDomainModel(c)),
+            e => e.ToObjectResult());
+
+
     }
 }

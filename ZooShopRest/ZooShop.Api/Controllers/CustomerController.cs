@@ -1,67 +1,87 @@
+using ZooShop.Api.Dtos;
+using ZooShop.Api.Modules.Errors;
+using ZooShop.Application.Common.Interfaces.Queries;
+using ZooShop.Application.Customers.Commands;
+using ZooShop.Domain.Customers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ZooShop.Application.Customers.Commands;
 using ZooShop.Application.Customers.Exceptions;
+using ZooShop.Api.Dtos;
+using ZooShop.Api.Modules.Errors;
+using ZooShop.Application.Common.Interfaces.Queries;
+using ZooShop.Application.Customers.Commands;
+
 using ZooShop.Domain.Customers;
 
 namespace ZooShop.Api.Controllers;
 
+[Route("customers")]
 [ApiController]
-[Route("api/[controller]")]
-public class CustomerController : ControllerBase
+public class CustomersController(ISender sender, ICustomerQueries customerQueries) : ControllerBase
 {
-    private readonly IMediator _mediator;
-
-    public CustomerController(IMediator mediator)
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<CustomerDto>>> GetAll(CancellationToken cancellationToken)
     {
-        _mediator = mediator;
+        var entities = await customerQueries.GetAll(cancellationToken);
+        return entities.Select(CustomerDto.FromDomainModel).ToList();
+    }
+
+    [HttpGet("{customerId:guid}")]
+    public async Task<ActionResult<CustomerDto>> Get([FromRoute] Guid customerId, CancellationToken cancellationToken)
+    {
+        var entity = await customerQueries.GetById(new CustomerId(customerId), cancellationToken);
+        return entity.Match<ActionResult<CustomerDto>>(
+            u => CustomerDto.FromDomainModel(u),
+            () => NotFound());
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateCustomer(CreateCustomerCommand command)
+    public async Task<ActionResult<CustomerDto>> Create([FromBody] CustomerDto request, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(command);
-
-        return result.Match<IActionResult>(
-            customer => Ok(customer),
-            exception => exception switch
-            {
-                CustomerAlreadyExistsException => Conflict(exception.Message),
-                _ => StatusCode(500, exception.Message)
-            });
-    }
-
-    [HttpPut("{id:guid}")]
-    public async Task<IActionResult> UpdateCustomer(Guid id, UpdateCustomerCommand command)
-    {
-        if (id != command.CustomerId)
+        var input = new CreateCustomerCommand
         {
-            return BadRequest("Customer ID mismatch");
-        }
+            Name = request.Name,
+            Email = request.Email,
+            Address = request.Address,
+            PhoneNumber = request.PhoneNumber
+        };
 
-        var result = await _mediator.Send(command);
-
-        return result.Match<IActionResult>(
-            customer => Ok(customer),
-            exception => exception switch
-            {
-                CustomerNotFoundException => NotFound(exception.Message),
-                _ => StatusCode(500, exception.Message)
-            });
+        var result = await sender.Send(input, cancellationToken);
+        return result.Match<ActionResult<CustomerDto>>(
+            c => CustomerDto.FromDomainModel(c),
+            e => e.ToObjectResult());
     }
 
-    [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> DeleteCustomer(Guid id)
+    [HttpPut]
+    public async Task<ActionResult<CustomerDto>> Update([FromBody] CustomerDto request, CancellationToken cancellationToken)
     {
-        var command = new DeleteCustomerCommand { CustomerId = id };
-        var result = await _mediator.Send(command);
+        var input = new UpdateCustomerCommand
+        {
+            CustomerId = request.Id!.Value,
+            Name = request.Name,
+            Email = request.Email,
+            Address = request.Address,
+            PhoneNumber = request.PhoneNumber
+        };
 
-        return result.Match<IActionResult>(
-            customer => Ok(customer),
-            exception => exception switch
-            {
-                CustomerNotFoundException => NotFound(exception.Message),
-                _ => StatusCode(500, exception.Message)
-            });
+        var result = await sender.Send(input, cancellationToken);
+        return result.Match<ActionResult<CustomerDto>>(
+            f => CustomerDto.FromDomainModel(f),
+            e => e.ToObjectResult());
+    }
+
+    [HttpDelete("{customerId:guid}")]
+    public async Task<ActionResult<CustomerDto>> Delete([FromRoute] Guid customerId, CancellationToken cancellationToken)
+    {
+        var input = new DeleteCustomerCommand
+        {
+            CustomerId = customerId
+        };
+
+        var result = await sender.Send(input, cancellationToken);
+        return result.Match<ActionResult<CustomerDto>>(
+            c => CustomerDto.FromDomainModel(c),
+            e => e.ToObjectResult());
+
     }
 }

@@ -1,67 +1,78 @@
+using ZooShop.Api.Dtos;
+using ZooShop.Api.Modules.Errors;
+using ZooShop.Application.Common.Interfaces.Queries;
+using ZooShop.Application.Orders.Commands;
+using ZooShop.Domain.Orders;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ZooShop.Application.Orders.Commands;
-using ZooShop.Application.Orders.Exceptions;
-using ZooShop.Domain.Orders;
 
-namespace ZooShop.Api.Controllers;
+namespace Api.Controllers;
 
+[Route("orders")]
 [ApiController]
-[Route("api/[controller]")]
-public class OrdersController : ControllerBase
+public class OrdersController(ISender sender, IOrderQueries orderQueries) : ControllerBase
 {
-    private readonly IMediator _mediator;
-
-    public OrdersController(IMediator mediator)
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<OrderDto>>> GetAll(CancellationToken cancellationToken)
     {
-        _mediator = mediator;
+        var entities = await orderQueries.GetAll(cancellationToken);
+        return entities.Select(OrderDto.FromDomainModel).ToList();
+    }
+
+    [HttpGet("{orderId:guid}")]
+    public async Task<ActionResult<OrderDto>> Get([FromRoute] Guid orderId, CancellationToken cancellationToken)
+    {
+        var entity = await orderQueries.GetById(new OrderId(orderId), cancellationToken);
+        return entity.Match<ActionResult<OrderDto>>(
+            u => OrderDto.FromDomainModel(u),
+            () => NotFound());
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateOrder(CreateOrderCommand command)
+    [HttpPost]
+    public async Task<ActionResult<OrderDto>> Create([FromBody] OrderDto request, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(command);
-
-        return result.Match<IActionResult>(
-            order => Ok(order),
-            exception => exception switch
-            {
-                OrderNotFoundException => NotFound(exception.Message),
-                _ => StatusCode(500, exception.Message)
-            });
-    }
-
-    [HttpPut("{id:guid}")]
-    public async Task<IActionResult> UpdateOrder(Guid id, UpdateOrderCommand command)
-    {
-        if (id != command.OrderId)
+        var input = new CreateOrderCommand
         {
-            return BadRequest("Order ID mismatch");
-        }
+            CustomerId = Guid.Empty, 
+            ProductIds = request.Products.Select(p => p.Id!.Value).ToList(),
+            TotalAmount = request.TotalAmount
+        };
 
-        var result = await _mediator.Send(command);
-
-        return result.Match<IActionResult>(
-            order => Ok(order),
-            exception => exception switch
-            {
-                OrderNotFoundException => NotFound(exception.Message),
-                _ => StatusCode(500, exception.Message)
-            });
+        var result = await sender.Send(input, cancellationToken);
+        return result.Match<ActionResult<OrderDto>>(
+            c => OrderDto.FromDomainModel(c),
+            e => e.ToObjectResult());
     }
 
-    [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> DeleteOrder(Guid id)
+    [HttpPut]
+    public async Task<ActionResult<OrderDto>> Update([FromBody] OrderDto request, CancellationToken cancellationToken)
     {
-        var command = new DeleteOrderCommand { OrderId = id };
-        var result = await _mediator.Send(command);
+        var input = new UpdateOrderCommand
+        {
+            OrderId = request.Id!.Value,
+            TotalAmount = request.TotalAmount,
+            ProductIds = request.Products.Select(p => p.Id!.Value).ToList()
+        };
 
-        return result.Match<IActionResult>(
-            order => Ok(order),
-            exception => exception switch
-            {
-                OrderNotFoundException => NotFound(exception.Message),
-                _ => StatusCode(500, exception.Message)
-            });
+        var result = await sender.Send(input, cancellationToken);
+        return result.Match<ActionResult<OrderDto>>(
+            f => OrderDto.FromDomainModel(f),
+            e => e.ToObjectResult());
+    }
+
+    [HttpDelete("{orderId:guid}")]
+    public async Task<ActionResult<OrderDto>> Delete([FromRoute] Guid orderId, CancellationToken cancellationToken)
+    {
+        var input = new DeleteOrderCommand
+        {
+            OrderId = orderId
+        };
+
+        var result = await sender.Send(input, cancellationToken);
+        return result.Match<ActionResult<OrderDto>>(
+            c => OrderDto.FromDomainModel(c),
+            e => e.ToObjectResult());
+
     }
 }

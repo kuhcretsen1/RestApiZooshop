@@ -12,20 +12,22 @@ namespace ZooShop.Domain.Products
         public int StockQuantity { get; private set; }
         public CategoryId CategoryId { get; private set; }  
 
-        private Product(ProductId id, string name, string description, decimal price, int stockQuantity, CategoryId categoryId)
+        public Product(ProductId id, string name, string description, decimal price, int stockQuantity, CategoryId categoryId)
         {
             Id = id;
             Name = name;
             Description = description;
             Price = price;
             StockQuantity = stockQuantity;
-            CategoryId = categoryId;  
+            CategoryId = categoryId;
         }
 
         public static Product New(ProductId id, string name, string description, decimal price, int stockQuantity, CategoryId categoryId)
         {
             return new Product(id, name, description, price, stockQuantity, categoryId);
         }
+
+
 
 
         public void UpdateDetails(string name, string description, decimal price, int stockQuantity)
