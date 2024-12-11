@@ -27,11 +27,9 @@ public class CreateAnimalCommandHandler : IRequestHandler<CreateAnimalCommand, R
         _animalRepository = animalRepository;
         _categoryRepository = categoryRepository;
     }
-
     public async Task<Result<Animal, AnimalException>> Handle(CreateAnimalCommand request, CancellationToken cancellationToken)
     {
         var categoryId = new CategoryId(request.CategoryId);
-
         var category = await _categoryRepository.GetById(categoryId, cancellationToken);
 
         return await category.Match<Task<Result<Animal, AnimalException>>>(

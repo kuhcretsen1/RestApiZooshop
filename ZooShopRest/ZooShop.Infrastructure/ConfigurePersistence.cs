@@ -15,7 +15,7 @@ public static class ConfigurePersistence
 {
     public static void AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
-        var dataSourceBuilder = new NpgsqlDataSourceBuilder(configuration.GetConnectionString("Default"));
+        var dataSourceBuilder = new NpgsqlDataSourceBuilder("Host=localhost;Database=ZooShopRestDb;Username=postgres;Password=postgres");
         dataSourceBuilder.EnableDynamicJson();
         var dataSource = dataSourceBuilder.Build();
 
@@ -25,7 +25,7 @@ public static class ConfigurePersistence
                     builder => builder.MigrationsAssembly(typeof(ZooShopDbContext).Assembly.FullName))
                 .UseSnakeCaseNamingConvention()
                 .ConfigureWarnings(w => w.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning)));
-
+        services.AddTransient<ZooShopDbContextInitialiser>();
         services.AddRepositories();
     }
 
@@ -33,12 +33,26 @@ public static class ConfigurePersistence
 
     private static void AddRepositories(this IServiceCollection services)
     {
-        // Приклад додавання репозиторіїв
-        services.AddScoped<IAnimalRepository, AnimalRepository>();
-        services.AddScoped<ICategoryRepository, CategoryRepository>();
-        services.AddScoped<IProductRepository, ProductRepository>();
-        services.AddScoped<IOrderRepository, OrderRepository>();
-        services.AddScoped<ICustomerRepository, CustomerRepository>();
+        
+        services.AddScoped<OrderRepository>();
+        services.AddScoped<IOrderRepository>(provider => provider.GetRequiredService<OrderRepository>());
+        services.AddScoped<IOrderQueries>(provider => provider.GetRequiredService<OrderRepository>());
+
+        services.AddScoped<CategoryRepository>();
+        services.AddScoped<ICategoryRepository>(provider => provider.GetRequiredService<CategoryRepository>());
+        services.AddScoped<ICategoryQueries>(provider => provider.GetRequiredService<CategoryRepository>());
+        
+        services.AddScoped<AnimalRepository>();
+        services.AddScoped<IAnimalRepository>(provider => provider.GetRequiredService<AnimalRepository>());
+        services.AddScoped<IAnimalQueries>(provider => provider.GetRequiredService<AnimalRepository>());
+        
+        services.AddScoped<CustomerRepository>();
+        services.AddScoped<ICustomerRepository>(provider => provider.GetRequiredService<CustomerRepository>());
+        services.AddScoped<ICustomerQueries>(provider => provider.GetRequiredService<CustomerRepository>());
+        
+        services.AddScoped<ProductRepository>();
+        services.AddScoped<IProductRepository>(provider => provider.GetRequiredService<ProductRepository>());
+        services.AddScoped<IProductQueries>(provider => provider.GetRequiredService<ProductRepository>());
     }
 
 }

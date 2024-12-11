@@ -19,7 +19,6 @@ public class DeleteAnimalCommandHandler(IAnimalRepository animalRepository)
         CancellationToken cancellationToken)
     {
         var animalId = new AnimalId(request.AnimalId);
-
         var existingAnimal = await animalRepository.GetById(animalId, cancellationToken);
 
         return await existingAnimal.Match<Task<Result<Animal, AnimalException>>>(

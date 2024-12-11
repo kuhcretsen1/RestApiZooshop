@@ -1,67 +1,75 @@
+using ZooShop.Api.Dtos;
+using ZooShop.Api.Modules.Errors;
+using ZooShop.Application.Common.Interfaces.Queries;
+using ZooShop.Application.Сategorys.Commands;
+using ZooShop.Domain.Categorys;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ZooShop.Application.Сategorys.Commands;
-using ZooShop.Application.Сategorys.Exceptions;
-using ZooShop.Domain.Categorys;
+
 
 namespace ZooShop.Api.Controllers;
 
+[Route("categories")]
 [ApiController]
-[Route("api/[controller]")]
-public class CategoriesController : ControllerBase
+public class CategoriesController(ISender sender, ICategoryQueries categoryQueries) : ControllerBase
 {
-    private readonly IMediator _mediator;
-
-    public CategoriesController(IMediator mediator)
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<CategoryDto>>> GetAll(CancellationToken cancellationToken)
     {
-        _mediator = mediator;
+        var entities = await categoryQueries.GetAll(cancellationToken);
+        return entities.Select(CategoryDto.FromDomainModel).ToList();
+    }
+
+    [HttpGet("{categoryId:guid}")]
+    public async Task<ActionResult<CategoryDto>> Get([FromRoute] Guid categoryId, CancellationToken cancellationToken)
+    {
+        var entity = await categoryQueries.GetById(new CategoryId(categoryId), cancellationToken);
+        return entity.Match<ActionResult<CategoryDto>>(
+            u => CategoryDto.FromDomainModel(u),
+            () => NotFound());
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateCategory(CreateCategoryCommand command)
+    public async Task<ActionResult<CategoryDto>> Create([FromBody] CategoryDto request, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(command);
-
-        return result.Match<IActionResult>(
-            category => Ok(category),
-            exception => exception switch
-            {
-                CategoryAlreadyExistsException => Conflict(exception.Message),
-                _ => StatusCode(500, exception.Message)
-            });
-    }
-
-    [HttpPut("{id:guid}")]
-    public async Task<IActionResult> UpdateCategory(Guid id, UpdateCategoryCommand command)
-    {
-        if (id != command.CategoryId)
+        var input = new CreateCategoryCommand
         {
-            return BadRequest("Category ID mismatch");
-        }
+            Name = request.Name
+        };
 
-        var result = await _mediator.Send(command);
-
-        return result.Match<IActionResult>(
-            category => Ok(category),
-            exception => exception switch
-            {
-                CategoryNotFoundException => NotFound(exception.Message),
-                _ => StatusCode(500, exception.Message)
-            });
+        var result = await sender.Send(input, cancellationToken);
+        return result.Match<ActionResult<CategoryDto>>(
+            c => CategoryDto.FromDomainModel(c),
+            e => e.ToObjectResult());
     }
 
-    [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> DeleteCategory(Guid id)
+    [HttpPut]
+    public async Task<ActionResult<CategoryDto>> Update([FromBody] CategoryDto request, CancellationToken cancellationToken)
     {
-        var command = new DeleteCategoryCommand { CategoryId = id };
-        var result = await _mediator.Send(command);
+        var input = new UpdateCategoryCommand
+        {
+            CategoryId = request.Id!.Value,
+            Name = request.Name
+        };
 
-        return result.Match<IActionResult>(
-            category => Ok(category),
-            exception => exception switch
-            {
-                CategoryNotFoundException => NotFound(exception.Message),
-                _ => StatusCode(500, exception.Message)
-            });
+        var result = await sender.Send(input, cancellationToken);
+        return result.Match<ActionResult<CategoryDto>>(
+            f => CategoryDto.FromDomainModel(f),
+            e => e.ToObjectResult());
+    }
+
+    [HttpDelete("{categoryId:guid}")]
+    public async Task<ActionResult<CategoryDto>> Delete([FromRoute] Guid categoryId, CancellationToken cancellationToken)
+    {
+        var input = new DeleteCategoryCommand
+        {
+            CategoryId = categoryId
+        };
+
+        var result = await sender.Send(input, cancellationToken);
+        return result.Match<ActionResult<CategoryDto>>(
+            c => CategoryDto.FromDomainModel(c),
+            e => e.ToObjectResult());
+
     }
 }

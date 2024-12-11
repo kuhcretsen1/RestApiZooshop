@@ -1,30 +1,24 @@
 using ZooShop.Domain.Animals;
 using ZooShop.Domain.Categorys;
-
 namespace ZooShop.Application.Animals.Exceptions;
-
 public abstract class AnimalException : Exception
 {
-    public AnimalId AnimalId { get; }
-    public CategoryId CategoryId { get; }
-
-    protected AnimalException(AnimalId id, string message, Exception? innerException = null)
+    public AnimalId? AnimalId { get; }
+    public CategoryId? CategoryId { get; }
+    protected AnimalException(AnimalId? animalId, CategoryId? categoryId, string message, Exception? innerException = null)
         : base(message, innerException)
     {
-        AnimalId = id;
-    }
+        AnimalId = animalId;
+        CategoryId = categoryId;
 
-    protected AnimalException(CategoryId id, string message, Exception? innerException = null)
-        : base(message, innerException)
-    {
-        CategoryId = id;
     }
 }
 
 public class AnimalNotFoundException : AnimalException
 {
     public AnimalNotFoundException(AnimalId id)
-        : base(id, $"Animal under id: {id} not found")
+        : base(id, null, $"Animal under id: {id} not found")
+
     {
     }
 }
@@ -32,7 +26,8 @@ public class AnimalNotFoundException : AnimalException
 public class AnimalAlreadyExistsException : AnimalException
 {
     public AnimalAlreadyExistsException(AnimalId id)
-        : base(id, $"Animal already exists: {id}")
+        : base(id, null, $"Animal already exists: {id}")
+
     {
     }
 }
@@ -40,7 +35,8 @@ public class AnimalAlreadyExistsException : AnimalException
 public class AnimalUnknownException : AnimalException
 {
     public AnimalUnknownException(AnimalId id, Exception innerException)
-        : base(id, $"Unknown exception for the animal under id: {id}", innerException)
+        : base(id, null, $"Unknown exception for the animal under id: {id}", innerException)
+
     {
     }
 }
@@ -48,7 +44,8 @@ public class AnimalUnknownException : AnimalException
 public class AnimalCategoryNotFoundException : AnimalException
 {
     public AnimalCategoryNotFoundException(CategoryId id)
-        : base(id, $"Category under id: {id} not found")
+        : base(null, id, $"Category under id: {id} not found")
+
     {
     }
 }

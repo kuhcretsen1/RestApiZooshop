@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using ZooShop.Domain.Categorys;
 
 namespace ZooShop.Domain.Animals;
@@ -7,14 +8,15 @@ namespace ZooShop.Domain.Animals;
 public class Animal
 {
     public AnimalId Id { get; set; }
-    public string Name { get; set; }  // Назва тварини
-    public string Species { get; set; } // Вид тварини
-    public int Age { get; set; } // Вік тварини
-    public decimal Price { get; set; } // Ціна тварини
+    public string Name { get; set; }  
+    public string Species { get; set; } 
+    public int Age { get; set; } 
+    public decimal Price { get; set; } 
 
     // Відношення
     public CategoryId CategoryId { get; set; }
-    public Category Category { get; set; } = null!; // Категорія (обов'язкова)
+    
+    public Category? Category { get; }  
 
     public static Animal Create(string name, string species, int age, decimal price, CategoryId categoryId)
     {
