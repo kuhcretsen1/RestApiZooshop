@@ -70,5 +70,6 @@ public class CategoriesController(ISender sender, ICategoryQueries categoryQueri
         return result.Match<ActionResult<CategoryDto>>(
             c => CategoryDto.FromDomainModel(c),
             e => e.ToObjectResult());
+
     }
 }

@@ -73,5 +73,6 @@ public class ProductsController(ISender sender, IProductQueries productQueries) 
         return result.Match<ActionResult<ProductDto>>(
             c => ProductDto.FromDomainModel(c),
             e => e.ToObjectResult());
+
     }
 }

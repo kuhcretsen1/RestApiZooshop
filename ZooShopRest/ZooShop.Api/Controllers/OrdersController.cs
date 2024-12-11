@@ -73,5 +73,6 @@ public class OrdersController(ISender sender, IOrderQueries orderQueries) : Cont
         return result.Match<ActionResult<OrderDto>>(
             c => OrderDto.FromDomainModel(c),
             e => e.ToObjectResult());
+
     }
 }

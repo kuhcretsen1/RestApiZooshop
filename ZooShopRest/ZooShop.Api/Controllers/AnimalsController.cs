@@ -1,3 +1,4 @@
+
 using ZooShop.Api.Dtos;
 using ZooShop.Api.Modules.Errors;
 using ZooShop.Application.Common.Interfaces.Queries;
@@ -85,5 +86,7 @@ public class AnimalsController : ControllerBase
         return result.Match<ActionResult<AnimalDto>>(
             c => Ok(AnimalDto.FromDomainModel(c)),
             e => e.ToObjectResult());
+
+
     }
 }

@@ -1,5 +1,6 @@
 using FluentValidation;
 namespace ZooShop.Application.Animals.Commands;
+
 public class UpdateAnimalCommandValidator : AbstractValidator<UpdateAnimalCommand>
 {
     public UpdateAnimalCommandValidator()

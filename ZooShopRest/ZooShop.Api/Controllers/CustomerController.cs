@@ -10,6 +10,7 @@ using ZooShop.Api.Dtos;
 using ZooShop.Api.Modules.Errors;
 using ZooShop.Application.Common.Interfaces.Queries;
 using ZooShop.Application.Customers.Commands;
+
 using ZooShop.Domain.Customers;
 
 namespace ZooShop.Api.Controllers;
@@ -81,5 +82,6 @@ public class CustomersController(ISender sender, ICustomerQueries customerQuerie
         return result.Match<ActionResult<CustomerDto>>(
             c => CustomerDto.FromDomainModel(c),
             e => e.ToObjectResult());
+
     }
 }

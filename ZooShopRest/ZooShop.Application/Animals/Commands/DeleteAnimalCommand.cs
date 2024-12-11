@@ -5,10 +5,12 @@ using ZooShop.Domain.Animals;
 using MediatR;
 
 namespace ZooShop.Application.Animals.Commands;
+
 public record DeleteAnimalCommand : IRequest<Result<Animal, AnimalException>>
 {
     public required Guid AnimalId { get; init; }
 }
+
 public class DeleteAnimalCommandHandler(IAnimalRepository animalRepository)
     : IRequestHandler<DeleteAnimalCommand, Result<Animal, AnimalException>>
 {
@@ -18,11 +20,13 @@ public class DeleteAnimalCommandHandler(IAnimalRepository animalRepository)
     {
         var animalId = new AnimalId(request.AnimalId);
         var existingAnimal = await animalRepository.GetById(animalId, cancellationToken);
+
         return await existingAnimal.Match<Task<Result<Animal, AnimalException>>>(
             async animal => await DeleteEntity(animal, cancellationToken),
             () => Task.FromResult<Result<Animal, AnimalException>>(new AnimalNotFoundException(animalId))
         );
     }
+
     private async Task<Result<Animal, AnimalException>> DeleteEntity(Animal animal, CancellationToken cancellationToken)
     {
         try

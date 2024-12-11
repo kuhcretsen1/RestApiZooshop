@@ -5,7 +5,9 @@ using ZooShop.Application.Сategorys.Exceptions;
 using ZooShop.Domain.Animals;
 using MediatR;
 using ZooShop.Domain.Categorys;
+
 namespace ZooShop.Application.Animals.Commands;
+
 public record CreateAnimalCommand : IRequest<Result<Animal, AnimalException>>
 {
     public required string Name { get; init; }
@@ -14,10 +16,12 @@ public record CreateAnimalCommand : IRequest<Result<Animal, AnimalException>>
     public required decimal Price { get; init; }
     public required Guid CategoryId { get; init; }
 }
+
 public class CreateAnimalCommandHandler : IRequestHandler<CreateAnimalCommand, Result<Animal, AnimalException>>
 {
     private readonly IAnimalRepository _animalRepository;
     private readonly ICategoryRepository _categoryRepository;
+
     public CreateAnimalCommandHandler(IAnimalRepository animalRepository, ICategoryRepository categoryRepository)
     {
         _animalRepository = animalRepository;
@@ -27,10 +31,12 @@ public class CreateAnimalCommandHandler : IRequestHandler<CreateAnimalCommand, R
     {
         var categoryId = new CategoryId(request.CategoryId);
         var category = await _categoryRepository.GetById(categoryId, cancellationToken);
+
         return await category.Match<Task<Result<Animal, AnimalException>>>(
             async c =>
             {
                 var existingAnimal = await _animalRepository.GetByName(request.Name, cancellationToken);
+
                 return await existingAnimal.Match(
                     animal => Task.FromResult<Result<Animal, AnimalException>>(new AnimalAlreadyExistsException(animal.Id)),
                     async () => await CreateEntity(request.Name, request.Species, request.Age, request.Price, categoryId, cancellationToken));
@@ -49,6 +55,7 @@ public class CreateAnimalCommandHandler : IRequestHandler<CreateAnimalCommand, R
         try
         {
             var entity = Animal.Create(name, species, age, price, categoryId);
+
             return await _animalRepository.Add(entity, cancellationToken);
         }
         catch (Exception exception)
