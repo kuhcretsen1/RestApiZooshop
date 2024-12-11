@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZooShop.Application", "ZooS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZooShop.Api", "ZooShop.Api\ZooShop.Api.csproj", "{702113D0-BD4D-4D16-B9CB-49A614239FF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZooShop.Api.Test", "ZooShop.Api.Test\ZooShop.Api.Test.csproj", "{96D3B1DB-216E-4E79-BFF5-23F7AB132D49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{702113D0-BD4D-4D16-B9CB-49A614239FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{702113D0-BD4D-4D16-B9CB-49A614239FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{702113D0-BD4D-4D16-B9CB-49A614239FF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D3B1DB-216E-4E79-BFF5-23F7AB132D49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D3B1DB-216E-4E79-BFF5-23F7AB132D49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D3B1DB-216E-4E79-BFF5-23F7AB132D49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D3B1DB-216E-4E79-BFF5-23F7AB132D49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
