@@ -1,54 +1,36 @@
-using Microsoft.EntityFrameworkCore;
+using ZooShop.Application;
+using ZooShop.Api;
 using ZooShop.Infrastructure;
-using System.Reflection;
-using MediatR;
-using FluentValidation;
-using FluentValidation.AspNetCore;
+using ZooShop.Application.Common.Interfaces;
+using ZooShop.Application.Common.Interfaces.Repositories;
+using ZooShop.Application.Common.Interfaces.Queries;
+using ZooShop.Infrastructure.Persistence.Migrations;
+using ZooShop.Application.Common.Interfaces.Repositories;
+using ZooShop.Application.Common.Interfaces.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Налаштуй DbContext
-builder.Services.AddDbContext<ZooShopDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ZooShopDatabase")));
-
-builder.Services.AddScoped<ZooShopDbContextInitialiser>();
-
-// Додай MediatR
-builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-
-// Додай FluentValidation
-builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-builder.Services.AddFluentValidationAutoValidation();
-
-
-
-// Swagger
+// Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-    {
-        Title = "ZooShop API",
-        Version = "v1"
-    });
-});
-
-// Додай контролери
+builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
+builder.Services.SetupServices();
+
+
 
 var app = builder.Build();
 
-// Інші налаштування
-app.UseSwagger(c =>
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    c.RouteTemplate = "swagger/{documentName}/swagger.json";
-});
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZooShop API V1");
-    c.RoutePrefix = string.Empty; // Робить Swagger кореневим маршрутом
-});
-app.UseHttpsRedirection();
-app.UseAuthorization();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+await app.InitialiseDb();
 app.MapControllers();
+
 app.Run();

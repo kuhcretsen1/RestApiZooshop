@@ -3,11 +3,12 @@ using ZooShop.Domain.Products;
 using ZooShop.Application.Common.Interfaces.Repositories;
 using Optional;
 using ZooShop.Application.Common;
+using ZooShop.Application.Common.Interfaces.Queries;
 using ZooShop.Application.Products.Exceptions;
 
 namespace ZooShop.Infrastructure.Persistence.Repositories;
 
-public class ProductRepository : IProductRepository
+public class ProductRepository : IProductRepository, IProductQueries
 {
     private readonly ZooShopDbContext _context;
 
@@ -30,6 +31,11 @@ public class ProductRepository : IProductRepository
         return product;
     }
 
+    Task IProductQueries.Delete(ProductId id, CancellationToken cancellationToken)
+    {
+        return Delete(id, cancellationToken);
+    }
+
     public async Task<Option<Product>> GetByName(string name, CancellationToken cancellationToken)
     {
         var product = await _context.Products
@@ -46,11 +52,10 @@ public class ProductRepository : IProductRepository
     {
         var product = await _context.Products
             .AsNoTracking()
-            .FirstOrDefaultAsync(p => p.Id.Value == id.Value, cancellationToken);
+            .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
         return product == null ? Option.None<Product>() : Option.Some(product);
     }
-
     
 
     public async Task<Result<Product, ProductException>> Delete(ProductId id, CancellationToken cancellationToken)
@@ -68,5 +73,5 @@ public class ProductRepository : IProductRepository
             return Result<Product, ProductException>.Failure(new ProductNotFoundException(id));
         }
     }
-
+    
 }

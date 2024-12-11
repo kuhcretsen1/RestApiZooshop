@@ -18,7 +18,7 @@ public class Category
     private readonly List<Product> _products = new();
     public IReadOnlyCollection<Product> Products => _products.AsReadOnly();
 
-    protected  Category(CategoryId id, string name)
+    public Category(CategoryId id, string name)
     {
         Id = id;
         Name = name;
